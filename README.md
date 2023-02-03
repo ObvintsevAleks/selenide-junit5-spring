@@ -4,7 +4,7 @@ selenide-junit5-spring-allure
 
 JUnit 5 - параметризация, паралелльное выполнение тестов
 
-Spring - основные используемые аннотации @Bean, @Component, @Autowired, @ContextConfiguration
+Spring IOC и связанные с ним аннотации @Bean, @Component и другие
 
 Selenide - работа с коллекцией элементов, работа с элементами, поиск элементов по Xpath
 
