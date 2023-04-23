@@ -28,7 +28,7 @@ public class NavisaleTest extends BaseSteps {
         chromedriver().setup();
         browser = "chrome";
         browserSize = "1920x1080";
-        headless = true;
+        headless = false;
     }
 
     @BeforeEach
@@ -44,7 +44,7 @@ public class NavisaleTest extends BaseSteps {
     @DisplayName("Переходы -> категория - подкатегория - сортировка товара по скидке - добавление в избранное ")
     @Owner("aobvintsev")
     @Tag("navisale")
-    @org.junit.jupiter.api.Test
+    @Test
     void case1() {
         open("https://shop.navisale.ru/");
         widgetSteps.goToMansBootsCategory();
@@ -59,7 +59,7 @@ public class NavisaleTest extends BaseSteps {
     @DisplayName("Переходы -> страница бренда - сортировка по возрасту - добавление в корзину")
     @Owner("aobvintsev")
     @Tag("navisale")
-    @org.junit.jupiter.api.Test
+    @Test
     void case2() {
         open("https://shop.navisale.ru/");
         widgetSteps.goToMansBootsCategory();
@@ -75,7 +75,7 @@ public class NavisaleTest extends BaseSteps {
     @DisplayName("Переходы -> каталог - добавление товара в избранное и в корзину, удаление из страницы избранных товаров и корзины")
     @Owner("aobvintsev")
     @Tag("navisale")
-    @org.junit.jupiter.api.Test
+    @Test
     void case3() {
         open("https://shop.navisale.ru/");
         widgetSteps.goToManShoesForSportCategory();
@@ -99,7 +99,7 @@ public class NavisaleTest extends BaseSteps {
     @DisplayName("Переходы -> каталог - добавление товара в избранное, удаление из страницы избранных товаров")
     @Owner("aobvintsev")
     @Tag("navisale")
-    @org.junit.jupiter.api.Test
+    @Test
     void case4() {
         open("https://shop.navisale.ru/");
         widgetSteps.goWomanSunglassesCategory();
@@ -118,7 +118,7 @@ public class NavisaleTest extends BaseSteps {
     @DisplayName("Операции с товаром из категории хиты продаж и женская одежда(баннер)")
     @Owner("aobvintsev")
     @Tag("navisale")
-    @org.junit.jupiter.api.Test
+    @Test
     void case5() {
         open("https://shop.navisale.ru/");
         mainSteps.goHotProduct();
@@ -137,7 +137,7 @@ public class NavisaleTest extends BaseSteps {
     @DisplayName("Добавление всех товаров из подборок на главной странице в избранное, корзину, удаление товаров")
     @Owner("aobvintsev")
     @Tag("navisale")
-    @org.junit.jupiter.api.Test
+    @Test
     void case6() {
         open("https://shop.navisale.ru/");
         mainSteps.addAllItemsToBasket();
@@ -154,7 +154,7 @@ public class NavisaleTest extends BaseSteps {
     @DisplayName("Проверка перехода по категориям - баннеры, header, widget, footer")
     @Owner("aobvintsev")
     @Tag("navisale")
-    @org.junit.jupiter.api.Test
+    @Test
     void case7() {
         open("https://shop.navisale.ru/");
         mainSteps.goToAllCategoryFromBanner();
