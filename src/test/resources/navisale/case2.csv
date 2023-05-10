@@ -1,8 +1,0 @@
-category                ;moreOption;brand      ;color;size;description
-Футболки мужские        ;true      ;Reebok     ;black;L   ;
-Обувь мужская           ;false     ;Puma       ;null ;null;
-Обувь мужская спортивная;false     ;Reebok     ;null ;null;
-Кроссовки женские       ;true      ;New Balance;null ;null;
-Толстовки мужские       ;true      ;Nike       ;null ;M   ;
-Футболки женские        ;true      ;New Balance;null ;S   ;
-Толстовки женские       ;true      ;New Balance;grey ;null;

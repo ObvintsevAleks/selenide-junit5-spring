@@ -14,7 +14,7 @@ public class BasketSteps {
 
     @Step("Удаление всех товаров - корзина")
     public void deleteAllItems() {
-        basketPage.getDeleteItemButtons().forEach(SelenideElement::click);
+        basketPage.getDeleteItemButtons().asFixedIterable().forEach(SelenideElement::click);
     }
 
     @Step("Добавление всех товаров в избранное - корзина")

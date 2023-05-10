@@ -30,20 +30,13 @@ public class MainSteps {
     @Step("Добавление списка товаров из подборки в корзину - главная страница")
     public void addAllItemsToBasket() {
         ElementsCollection allItems = mainPage.getAddItemToBasketButtons().filter(visible);
-        int i = 0;
-        for (SelenideElement item : allItems) {
-            allItems.get(i).click();
-            itemAddWindowSteps.goToShopping();
-            i++;
-        }
+        allItems.asFixedIterable().forEach(SelenideElement::click);
     }
 
     @Step("Добавление списка товаров из подборки в избранное - главная страница")
     public void addAllItemsToFavorite() {
         ElementsCollection allItems = mainPage.getAddItemToFavouriteButtons().filter(visible);
-        for (SelenideElement item : allItems) {
-            item.click();
-        }
+        allItems.asFixedIterable().forEach(SelenideElement::click);
     }
 
     @Step("Переключение подборки товаров с категории 'Новинки' в категорию 'Хиты продаж' - главная страница")
