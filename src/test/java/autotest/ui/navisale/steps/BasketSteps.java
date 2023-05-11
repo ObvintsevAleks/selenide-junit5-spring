@@ -19,7 +19,7 @@ public class BasketSteps {
 
     @Step("Добавление всех товаров в избранное - корзина")
     public void addAllItemsToFavourite() {
-        basketPage.getAddItemsToFavouriteButtons().forEach(SelenideElement::click);
+        basketPage.getAddItemsToFavouriteButtons().asFixedIterable().forEach(SelenideElement::click);
     }
 
 }

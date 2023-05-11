@@ -5,7 +5,9 @@ import autotest.ui.navisale.steps.BaseSteps;
 import autotest.ui.navisale.test.data.testData;
 import com.codeborne.pdftest.PDF;
 import com.codeborne.xlstest.XLS;
+import io.qameta.allure.AllureId;
 import io.qameta.allure.Owner;
+import io.qameta.allure.Story;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.poi.ss.usermodel.Row;
@@ -42,7 +44,7 @@ public class NavisaleTest extends BaseSteps {
         chromedriver().setup();
         browser = "chrome";
         browserSize = "1920x1080";
-        headless = false;
+        headless = true;
         webdriverLogsEnabled = true;
         downloadsFolder = "target/build/downloads";
         reportsFolder = "target/build/reports";
@@ -58,8 +60,10 @@ public class NavisaleTest extends BaseSteps {
         closeWebDriver();
     }
 
+    @AllureId("1")
     @DisplayName("Переходы: категория - подкатегория - сортировка товара по скидке - добавление в избранное ")
     @Owner("aobvintsev")
+    @Story("UI WEB")
     @Tags({@Tag("navisale"), @Tag("ui")})
     @Test
     void case1() {
@@ -73,8 +77,10 @@ public class NavisaleTest extends BaseSteps {
 
     }
 
+    @AllureId("2")
     @DisplayName("Переходы: страница бренда - сортировка по возрасту - добавление в корзину")
     @Owner("aobvintsev")
+    @Story("UI WEB")
     @Tags({@Tag("navisale"), @Tag("ui")})
     @Test
     void case2() {
@@ -89,8 +95,10 @@ public class NavisaleTest extends BaseSteps {
         headerSteps.goToBasketFromWindow();
     }
 
+    @AllureId("3")
     @DisplayName("Переходы: каталог - добавление товара в избранное и в корзину, удаление из страницы избранных товаров и корзины")
     @Owner("aobvintsev")
+    @Story("UI WEB")
     @Tags({@Tag("navisale"), @Tag("ui")})
     @Test
     void case3() {
@@ -113,8 +121,10 @@ public class NavisaleTest extends BaseSteps {
         favoritesSteps.deleteAllFromFavorite();
     }
 
+    @AllureId("4")
     @DisplayName("Переходы: каталог - добавление товара в избранное, удаление из страницы избранных товаров")
     @Owner("aobvintsev")
+    @Story("UI WEB")
     @Tags({@Tag("navisale"), @Tag("ui")})
     @Test
     void case4() {
@@ -132,8 +142,10 @@ public class NavisaleTest extends BaseSteps {
     }
 
 
+    @AllureId("7")
     @DisplayName("Проверка перехода по категориям - баннеры, header, widget, footer")
     @Owner("aobvintsev")
+    @Story("UI WEB")
     @Tags({@Tag("navisale"), @Tag("ui")})
     @Test
     void case7() {
@@ -145,8 +157,10 @@ public class NavisaleTest extends BaseSteps {
         footerSteps.goToSubcategory();
     }
 
+    @AllureId("8")
     @DisplayName("Поиск товаров согласно поисковому запросу")
     @Owner("aobvintsev")
+    @Story("UI WEB")
     @Tags({@Tag("navisale"), @Tag("ui")})
     @ParameterizedTest(name = "В корзине появится товар согласно поисковому запросу - {0} и {1}")
     @CsvSource(textBlock = """
@@ -170,8 +184,10 @@ public class NavisaleTest extends BaseSteps {
         basketSteps.deleteAllItems();
     }
 
+    @AllureId("9")
     @DisplayName("Поиск товара по категориям с настройкой фильтра для товаров")
     @Owner("aobvintsev")
+    @Story("UI WEB")
     @Tags({@Tag("navisale"), @Tag("ui")})
     @ParameterizedTest(name = "В поисковом запросе выдается товар из {0} {2}")
     @CsvSource(useHeadersInDisplayName = true, textBlock = """
@@ -205,12 +221,14 @@ public class NavisaleTest extends BaseSteps {
         headerSteps.goToBasket();
     }
 
+    @AllureId("10")
     @SneakyThrows
     @DisplayName("Работа с пдф файлом")
     @Owner("aobvintsev")
+    @Story("UI FILE")
     @Tags({@Tag("pdf"), @Tag("file"), @Tag("ui")})
     @Test
-    void pdfTest() {
+    void case10() {
         pageLoadStrategy = "eager";
         open("https://junit.org/junit5/docs/current/user-guide/");
         File downloadedFile = $("a[href='junit-user-guide-5.9.3.pdf']").download();
@@ -225,12 +243,14 @@ public class NavisaleTest extends BaseSteps {
         );
     }
 
+    @AllureId("11")
     @SneakyThrows
     @DisplayName("Работа с excel файлом")
     @Owner("aobvintsev")
+    @Story("UI FILE")
     @Tags({@Tag("excel"), @Tag("file")})
     @Test
-    void excelTest() {
+    void case11() {
         pageLoadStrategy = "eager";
         testData data = new testData();
         List<List<String>> testData = data.getTestData();
@@ -262,9 +282,11 @@ public class NavisaleTest extends BaseSteps {
     }
 
 
+    @AllureId("5")
     @Disabled("Товары из категории хиты продаж отсутствуют")
     @DisplayName("Операции с товаром из категории хиты продаж и женская одежда(баннер)")
     @Owner("aobvintsev")
+    @Story("UI WEB")
     @Tags({@Tag("navisale"), @Tag("ui")})
     @Test
     void case5() {
@@ -282,9 +304,11 @@ public class NavisaleTest extends BaseSteps {
         basketSteps.deleteAllItems();
     }
 
+    @AllureId("6")
     @Disabled("Товары из категории хиты продаж и товары на первой странице отсутствуют")
     @DisplayName("Добавление всех товаров из подборок на главной странице в избранное, корзину, удаление товаров")
     @Owner("aobvintsev")
+    @Story("UI WEB")
     @Tags({@Tag("navisale"), @Tag("ui")})
     @Test
     void case6() {
