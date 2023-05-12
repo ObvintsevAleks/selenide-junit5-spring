@@ -36,7 +36,7 @@ public class DefaultItemSteps {
 
     @Step("Добавить все товары из подборки в корзину - страница товара")
     public void addAllAnotherItemToBasket() {
-        defaultItemPage.getAddAnotherItemToBasketButtons().filter(visible).forEach(SelenideElement::click);
+        defaultItemPage.getAddAnotherItemToBasketButtons().filter(visible).asFixedIterable().forEach(SelenideElement::click);
     }
 
     @Step("Добавить первый товар из подборки в избранное - страница товара")
@@ -46,7 +46,7 @@ public class DefaultItemSteps {
 
     @Step("Добавить все товары из подборки в избранное - страница товара")
     public void addAllAnotherItemToFavourite() {
-        defaultItemPage.getAddAnotherItemToFavouriteButtons().filter(visible).forEach(SelenideElement::click);
+        defaultItemPage.getAddAnotherItemToFavouriteButtons().filter(visible).asFixedIterable().forEach(SelenideElement::click);
     }
 
 

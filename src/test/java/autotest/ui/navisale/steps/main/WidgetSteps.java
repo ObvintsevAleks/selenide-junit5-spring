@@ -15,6 +15,7 @@ public class WidgetSteps {
     @Autowired
     private Widget widget;
 
+    @Step("Открываем виджет каталога")
     public void goToCatalogue() {
         widget.getCatalogWidgetButton().hover();
         sleep(150);
@@ -244,7 +245,7 @@ public class WidgetSteps {
         widget.getWomanSunglassesButton().click();
     }
 
-    @Step("Переход по всем категориям - widget")
+    @Step("Переход в виджете по всем категориям")
     public void goToAllCategoryFromWidget() {
         goToManShoesForSportCategory();
         goToManKicksCategory();
@@ -265,6 +266,7 @@ public class WidgetSteps {
         goWomanSunglassesCategory();
     }
 
+    @Step("Выбираем категорию - {category}")
     public void chooseCategory(String category) {
         if (category.equalsIgnoreCase("Обувь мужская")) {
             goToMansBootsCategory();
