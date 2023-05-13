@@ -47,7 +47,7 @@ public class NavisaleTest extends BaseSteps {
         chromedriver().setup();
         browser = "chrome";
         browserSize = "1920x1080";
-        headless = true;
+        headless = false;
         webdriverLogsEnabled = true;
         downloadsFolder = "target/build/downloads";
         reportsFolder = "target/build/reports";
@@ -206,18 +206,10 @@ public class NavisaleTest extends BaseSteps {
     void case9(String category, Boolean moreOption, String brand, String color, String size) {
         step("Открываем страницу shop.navisale.ru", () -> open("https://shop.navisale.ru/"));
         widgetSteps.chooseCategory(category);
-        if (moreOption) {
-            filterSteps.getMoreOptions();
-        }
-        if (brand != null) {
-            filterSteps.chooseBrand(brand);
-        }
-        if (color != null) {
-            filterSteps.chooseColor(color);
-        }
-        if (size != null) {
-            filterSteps.chooseSize(size);
-        }
+        filterSteps.getMoreOptions(moreOption);
+        filterSteps.chooseBrand(brand);
+        filterSteps.chooseColor(color);
+        filterSteps.chooseSize(size);
         defaultCategoryItemSteps.getFirstItem();
         defaultItemSteps.addItemToBasket();
         itemAddWindowSteps.close();
