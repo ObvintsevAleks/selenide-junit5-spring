@@ -47,7 +47,7 @@ public class NavisaleTest extends BaseSteps {
         chromedriver().setup();
         browser = "chrome";
         browserSize = "1920x1080";
-        headless = false;
+        headless = true;
         webdriverLogsEnabled = true;
         downloadsFolder = "target/build/downloads";
         reportsFolder = "target/build/reports";

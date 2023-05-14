@@ -1,0 +1,47 @@
+name: Test
+
+on: [ push ]
+
+jobs:
+  test:
+      #где запускаю
+    runs-on: ubuntu-latest
+      #что делаю
+    steps:
+      # выкачиваю репозиторий
+      - uses: actions/checkout@v3
+      # настраиваю Java
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+            distribution: 'zulu'
+            java-version: '17'
+      # Caching maven dependencies
+            cache: 'maven'
+      # mvn build script
+        run: mvn clean test -Dselenide.remote=http://localhost:4547/wd/hub
+      # selenoid action
+      - uses: Xotabu4/selenoid-github-action@v2
+      # скачиваем историю тестов
+      - uses: actions/checkout@v2
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+      # генерируем отчёт
+      - name: Test local action
+        uses: ./allure-report-action
+        if: always()
+        with:
+          allure_results: build/allure-results
+          gh_pages: gh-pages
+          allure_report: allure-report
+          allure_history: allure-history
+      # публикуем отчёт
+      - uses: peaceiris/actions-gh-pages@v2
+        if: always()
+        env:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
