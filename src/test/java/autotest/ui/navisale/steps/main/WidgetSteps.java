@@ -15,7 +15,7 @@ public class WidgetSteps {
     @Autowired
     private Widget widget;
 
-    @Step("Открываем виджет каталога")
+
     public void goToCatalogue() {
         widget.getCatalogWidgetButton().hover();
         sleep(150);
@@ -268,46 +268,27 @@ public class WidgetSteps {
 
     @Step("Выбираем категорию - {category}")
     public void chooseCategory(String category) {
-        if (category.equalsIgnoreCase("Обувь мужская")) {
-            goToMansBootsCategory();
-        } else if(category.equalsIgnoreCase("Обувь мужская спортивная")) {
-            goToManShoesForSportCategory();
-        } else if(category.equalsIgnoreCase("Кеды мужские")) {
-            goToManKicksCategory();
-        } else if(category.equalsIgnoreCase("Кроссовки женские")) {
-            goWomanSneakersCategory();
-        } else if(category.equalsIgnoreCase("Кеды женские")) {
-            goWomanKicksCategory();
-        } else if(category.equalsIgnoreCase("Футболки мужские")) {
-            goManTShirtsCategory();
-        } else if(category.equalsIgnoreCase("Толстовки мужские")) {
-            goManHoodiesCategory();
-        } else if(category.equalsIgnoreCase("Куртки мужские")) {
-            goManJacketsCategory();
-        } else if(category.equalsIgnoreCase("Футболки женские")) {
-            goWomanTShirtsCategory();
-        } else if(category.equalsIgnoreCase("Толстовки женские")) {
-            goWomanHoodiesCategory();
-        } else if(category.equalsIgnoreCase("Куртки женские")) {
-            goWomanJacketsCategory();
-        } else if(category.equalsIgnoreCase("Рюкзаки спортивные")) {
-            goSportsBackpackCategory();
-        } else if(category.equalsIgnoreCase("Рюкзаки городские")) {
-            goCityBackpackCategory();
-        } else if(category.equalsIgnoreCase("Сумки поясные")) {
-            goBeltBagCategory();
-        } else if(category.equalsIgnoreCase("Сумки через плечо")) {
-            goShoulderBagCategory();
-        } else if(category.equalsIgnoreCase("Сумки спортивные")) {
-            goSportBagCategory();
-        } else if(category.equalsIgnoreCase("Бейсболки")) {
-            goBaseballCapCategory();
-        } else if(category.equalsIgnoreCase("Очки мужские")) {
-            goManSunglassesCategory();
-        } else if(category.equalsIgnoreCase("Очки женские")) {
-            goWomanSunglassesCategory();
-        } else {
-            fail();
+        switch (category) {
+            case "Обувь мужская" -> goToMansBootsCategory();
+            case "Обувь мужская спортивная" -> goToManShoesForSportCategory();
+            case "Кеды мужские" -> goToManKicksCategory();
+            case "Кроссовки женские" -> goWomanSneakersCategory();
+            case "Кеды женские" -> goWomanKicksCategory();
+            case "Футболки мужские" -> goManTShirtsCategory();
+            case "Толстовки мужские" -> goManHoodiesCategory();
+            case "Куртки мужские" -> goManJacketsCategory();
+            case "Футболки женские" -> goWomanTShirtsCategory();
+            case "Толстовки женские" -> goWomanHoodiesCategory();
+            case "Куртки женские" -> goWomanJacketsCategory();
+            case "Рюкзаки спортивные" -> goSportsBackpackCategory();
+            case "Рюкзаки городские" -> goCityBackpackCategory();
+            case "Сумки поясные" -> goBeltBagCategory();
+            case "Сумки через плечо" -> goShoulderBagCategory();
+            case "Сумки спортивные" -> goSportBagCategory();
+            case "Бейсболки" -> goBaseballCapCategory();
+            case "Очки мужские" -> goManSunglassesCategory();
+            case "Очки женские" -> goWomanSunglassesCategory();
+            default -> fail("Неправильно выбрана категория");
         }
     }
 
