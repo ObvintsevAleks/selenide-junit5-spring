@@ -4,6 +4,7 @@ import autotest.ui.navisale.config.SpringConfig;
 import autotest.ui.navisale.steps.BaseSteps;
 import autotest.ui.navisale.test.data.TestData;
 import com.codeborne.pdftest.PDF;
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.codeborne.xlstest.XLS;

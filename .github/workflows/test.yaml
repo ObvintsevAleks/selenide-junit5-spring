@@ -18,7 +18,7 @@ jobs:
       # Caching maven dependencies
             cache: 'maven'
       # mvn build script
-      - run: mvn clean test -Dselenide.remote=http://localhost:4444/wd/hub
+      - run: mvn clean test
       # selenoid action
       - uses: Xotabu4/selenoid-github-action@v2
         with:
