@@ -4,6 +4,7 @@ import autotest.ui.navisale.config.SpringConfig;
 import autotest.ui.navisale.steps.BaseSteps;
 import autotest.ui.navisale.test.data.TestData;
 import com.codeborne.pdftest.PDF;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.codeborne.xlstest.XLS;
 import io.qameta.allure.AllureId;
@@ -43,25 +44,22 @@ import static org.junit.jupiter.api.Assertions.*;
 @RequiredArgsConstructor
 public class NavisaleTest extends BaseSteps {
 
-    public void setUp() {
+
+    @BeforeAll
+    public static void init() {
+        SelenideLogger.addListener("Allure", new AllureSelenide());
         chromedriver().setup();
         browser = "chrome";
         browserSize = "1920x1080";
-        headless = true;
+        headless = false;
         webdriverLogsEnabled = true;
         downloadsFolder = "target/build/downloads";
         reportsFolder = "target/build/reports";
     }
 
-    @BeforeEach
-    public void init() {
-        setUp();
-        SelenideLogger.addListener("Allure", new AllureSelenide());
-    }
-
     @AfterEach
     public void closeDriver() {
-        closeWebDriver();
+        step("log out", Selenide::closeWebDriver);
     }
 
     @AllureId("1")
