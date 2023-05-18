@@ -19,11 +19,11 @@ jobs:
             cache: 'maven'
       # mvn build script
       - run: mvn clean test
-#      # selenoid action
-#      - uses: Xotabu4/selenoid-github-action@v2
-#        with:
-#          selenoid-start-arguments: |
-#            --browsers 'chrome:112.0'
+      # selenoid action
+      - uses: Xotabu4/selenoid-github-action@v2
+        with:
+          selenoid-start-arguments: |
+            --browsers 'chrome:112.0'
       # скачиваем историю тестов
       - uses: actions/checkout@v2
         if: always()
