@@ -4,7 +4,7 @@ import autotest.ui.navisale.config.SpringConfig;
 import autotest.ui.navisale.steps.BaseSteps;
 import autotest.ui.navisale.test.data.TestData;
 import com.codeborne.pdftest.PDF;
-import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.codeborne.xlstest.XLS;
 import io.qameta.allure.AllureId;
@@ -21,10 +21,16 @@ import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.testcontainers.containers.BrowserWebDriverContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.io.File;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -38,18 +44,22 @@ import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 import static io.qameta.allure.Allure.step;
 import static org.junit.jupiter.api.Assertions.*;
 
+@Testcontainers
 @Execution(ExecutionMode.SAME_THREAD)
 @ExtendWith({SpringExtension.class})
 @ContextConfiguration(classes = {SpringConfig.class})
 @RequiredArgsConstructor
 public class NavisaleTest extends BaseSteps {
 
+    private RemoteWebDriver browser;
+    @Container
+    private static final BrowserWebDriverContainer<?> seleniumContainer = new BrowserWebDriverContainer<>();
 
     @BeforeAll
     public static void init() {
+        remote = "http://localhost:5678/wd/hub";
         SelenideLogger.addListener("Allure", new AllureSelenide());
         chromedriver().setup();
-        browser = "chrome";
         browserSize = "1920x1080";
         headless = false;
         webdriverLogsEnabled = true;
@@ -57,9 +67,16 @@ public class NavisaleTest extends BaseSteps {
         reportsFolder = "target/build/reports";
     }
 
+    @BeforeEach
+    void setUp(){
+        browser = new RemoteWebDriver(seleniumContainer.getSeleniumAddress(), new ChromeOptions());
+        browser.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        WebDriverRunner.setWebDriver(browser);
+    }
+
     @AfterEach
     public void closeDriver() {
-        step("log out", Selenide::closeWebDriver);
+        step("log out", WebDriverRunner::closeWebDriver);
     }
 
     @AllureId("1")
