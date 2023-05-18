@@ -19,12 +19,13 @@ jobs:
             cache: 'maven'
       # mvn build script
       - run: mvn clean test
-      # selenoid action
-      - uses: Xotabu4/selenoid-github-action@v2
-        with:
-          selenoid-start-arguments: |
-            --browsers 'chrome:112.0'
+#      # selenoid action
+#      - uses: Xotabu4/selenoid-github-action@v2
+#        with:
+#          selenoid-start-arguments: |
+#            --browsers 'chrome:112.0'
       # скачиваем историю тестов
+      - name: Get Allure history
       - uses: actions/checkout@v2
         if: always()
         continue-on-error: true
@@ -32,16 +33,19 @@ jobs:
           ref: gh-pages
           path: gh-pages
       # генерируем отчёт
-      - uses: ObvintsevAleks/selenide-junit5-spring@main
+      - name: Test marketplace action
+        uses: simple-elf/allure-report-action@master
         if: always()
+        id: allure-report
         with:
           allure_results: build/allure-results
           gh_pages: gh-pages
           allure_report: allure-report
           allure_history: allure-history
       # публикуем отчёт
-      - uses: ObvintsevAleks/selenide-junit5-spring@main
+      - name: Deploy report to Github Pages
         if: always()
+        uses: peaceiris/actions-gh-pages@v2
         env:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
