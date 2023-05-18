@@ -25,7 +25,6 @@ jobs:
 #          selenoid-start-arguments: |
 #            --browsers 'chrome:112.0'
       # скачиваем историю тестов
-      - name: Get Allure history
       - uses: actions/checkout@v2
         if: always()
         continue-on-error: true
@@ -33,7 +32,6 @@ jobs:
           ref: gh-pages
           path: gh-pages
       # генерируем отчёт
-      - name: Test marketplace action
       - uses: simple-elf/allure-report-action@master
         if: always()
         id: allure-report
@@ -43,7 +41,6 @@ jobs:
           allure_report: allure-report
           allure_history: allure-history
       # публикуем отчёт
-      - name: Deploy report to Github Pages
       - uses: peaceiris/actions-gh-pages@v2
         if: always()
         env:
